@@ -1046,7 +1046,7 @@ def stock_zh_a_hist(
         "涨跌额",
         "换手率",
     ]
-    temp_df["日期"] = pd.to_datetime(temp_df["日期"], errors="coerce").dt.date
+    temp_df["日期"] = pd.to_datetime(temp_df["日期"], errors="coerce").dt.strftime("%Y%m%d")
     temp_df["开盘"] = pd.to_numeric(temp_df["开盘"], errors="coerce")
     temp_df["收盘"] = pd.to_numeric(temp_df["收盘"], errors="coerce")
     temp_df["最高"] = pd.to_numeric(temp_df["最高"], errors="coerce")
@@ -1057,6 +1057,8 @@ def stock_zh_a_hist(
     temp_df["涨跌幅"] = pd.to_numeric(temp_df["涨跌幅"], errors="coerce")
     temp_df["涨跌额"] = pd.to_numeric(temp_df["涨跌额"], errors="coerce")
     temp_df["换手率"] = pd.to_numeric(temp_df["换手率"], errors="coerce")
+    temp_df.rename(columns = {'开盘':'open', '收盘':'close','日期':'date',"最低":'low',"振幅":'pct_chg',
+                              '涨跌额':'chg_amount',"涨跌幅":'chg_rate',"换手率":'to',"成交量":'volume',"成交额":'amount','最高':'high'}, inplace = True)
     return temp_df
 
 
